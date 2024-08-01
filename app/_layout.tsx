@@ -4,7 +4,7 @@ import "../global.css";
 
 export default function RootLayout() {
   return (
-    <Stack>
+    <Stack screenOptions={{ navigationBarHidden: true }}>
       <Stack.Screen options={{ headerShown: false }} name="(tabs)" />
     </Stack>
   );

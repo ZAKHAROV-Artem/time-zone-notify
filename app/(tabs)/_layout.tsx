@@ -1,13 +1,26 @@
 import { Tabs } from "expo-router";
 
+import { TabBar } from "~/components/navigation/tab-bar";
+
 export default function TabLayout() {
   return (
-    <Tabs>
+    <Tabs
+      screenOptions={{
+        headerShown: false,
+      }}
+      tabBar={(props) => <TabBar {...props} />}
+    >
       <Tabs.Screen
         options={{
           title: "Tab One",
         }}
         name="index"
+      />
+      <Tabs.Screen
+        options={{
+          title: "Calendar",
+        }}
+        name="calendar"
       />
     </Tabs>
   );

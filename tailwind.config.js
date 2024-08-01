@@ -17,7 +17,7 @@ module.exports = {
       },
     },
   },
-  content: ["./app/**/*.{js,jsx,ts,tsx}"],
+  content: ["./app/**/*.{js,jsx,ts,tsx}", "./components/**/*.{ts,tsx}"],
   presets: [require("nativewind/preset")],
   darkMode: "class",
   plugins: [],
