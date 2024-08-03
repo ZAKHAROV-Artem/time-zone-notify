@@ -19,12 +19,12 @@ type Props = {
 
 export default function TabBarItemIcon({ isFocused, name }: Props) {
   const iconStyle = useAnimatedStyle(() => ({
+    opacity: withTiming(isFocused ? 1 : 0.5),
     transform: [
       {
         scale: withSpring(isFocused ? 1.2 : 1),
       },
     ],
-    opacity: withTiming(isFocused ? 1 : 0.5),
   }));
 
   function Icon() {

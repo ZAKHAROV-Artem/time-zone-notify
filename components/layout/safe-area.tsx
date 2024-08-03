@@ -8,7 +8,7 @@ type SafeAreaProps = {
   children: ReactNode;
   className?: string;
 };
-export default function SafeArea({ className, children }: SafeAreaProps) {
+export default function SafeArea({ children, className }: SafeAreaProps) {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View className={cn("flex-1 bg-crystal-sky", className)}>{children}</View>

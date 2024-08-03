@@ -12,8 +12,8 @@ export function iconWithClassName(icon: LucideIcon) {
   cssInterop(icon, {
     className: {
       nativeStyleToProp: {
-        opacity: true,
         color: true,
+        opacity: true,
       },
       target: "style",
     },

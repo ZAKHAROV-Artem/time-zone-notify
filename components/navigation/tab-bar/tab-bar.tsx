@@ -23,8 +23,8 @@ export default function TabBar({
   }));
 
   const [dimensions, setDimensions] = useState({
-    width: 124.95237731933594,
     height: 65.9047622680664,
+    width: 124.95237731933594,
   });
 
   const gapBetweenButtons = 8;
@@ -78,8 +78,8 @@ export default function TabBar({
 
           const onLongPress = () => {
             navigation.emit({
-              type: "tabLongPress",
               target: route.key,
+              type: "tabLongPress",
             });
           };
 

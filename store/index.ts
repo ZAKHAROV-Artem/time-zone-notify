@@ -14,8 +14,8 @@ import { configureStore } from "@reduxjs/toolkit";
 import rootReducer from "./reducers";
 
 const persistConfig = {
-  storage: AsyncStorage,
   key: "root",
+  storage: AsyncStorage,
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
