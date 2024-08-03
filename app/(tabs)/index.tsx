@@ -1,9 +1,11 @@
-import { Text, View } from "react-native";
+import { Text } from "react-native";
+
+import { SafeArea } from "~/components/layout";
 
 export default function HomeScreen() {
   return (
-    <View className="flex-1 items-center justify-center">
+    <SafeArea>
       <Text>Tab One</Text>
-    </View>
+    </SafeArea>
   );
 }

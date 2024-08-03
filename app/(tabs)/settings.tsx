@@ -1,9 +1,11 @@
-import { Text, View } from "react-native";
+import { Text } from "react-native";
+
+import { SafeArea } from "~/components/layout";
 
 export default function SettignsScreen() {
   return (
-    <View className="flex-1 items-center justify-center">
+    <SafeArea>
       <Text>Settings page</Text>
-    </View>
+    </SafeArea>
   );
 }
