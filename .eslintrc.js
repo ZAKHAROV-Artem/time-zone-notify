@@ -3,16 +3,12 @@ module.exports = {
   env: {
     node: true,
   },
-  extends: [
-    "expo",
-    "prettier",
-    "plugin:perfectionist/recommended-line-length-legacy",
-  ],
+  extends: ["expo", "prettier"],
   plugins: ["prettier", "perfectionist"],
   rules: {
-    "perfectionist/sort-imports": "error",
-    "perfectionist/sort-named-exports": "error",
-    "perfectionist/sort-named-imports": "error",
+    "perfectionist/sort-imports": ["error", { type: "line-length" }],
+    "perfectionist/sort-named-exports": ["error", { type: "line-length" }],
+    "perfectionist/sort-named-imports": ["error", { type: "line-length" }],
     "perfectionist/sort-objects": ["error", { type: "alphabetical" }],
 
     "prettier/prettier": [

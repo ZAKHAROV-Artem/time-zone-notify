@@ -1,15 +1,15 @@
+import React from "react";
 import Animated, {
-  useAnimatedStyle,
   withSpring,
   withTiming,
+  useAnimatedStyle,
 } from "react-native-reanimated";
-import React from "react";
 
 import {
+  Home,
+  BellDot,
   Calendar,
   Settings,
-  BellDot,
-  Home,
 } from "~/components/data-display/icons";
 
 type Props = {

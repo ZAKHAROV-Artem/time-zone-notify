@@ -3,7 +3,7 @@ import {
   useSelector as useNotTypedSelector,
 } from "react-redux";
 
-import { AppDispatch, RootState } from "../types";
+import { RootState, AppDispatch } from "../types";
 
 export const useDispatch = useNotTypedDispatch.withTypes<AppDispatch>();
 export const useSelector = useNotTypedSelector.withTypes<RootState>();

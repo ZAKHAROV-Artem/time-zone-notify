@@ -1,15 +1,15 @@
-import { Pressable, Text } from "react-native";
+import { Text, Pressable } from "react-native";
 
-import { decrement, increment } from "~/store/slices/counter";
-import { useDispatch, useSelector } from "~/store/hooks";
 import { SafeArea } from "~/components/layout";
+import { useDispatch, useSelector } from "~/store/hooks";
+import { decrement, increment } from "~/store/slices/counter";
 
 type RemaindersScreenProps = {};
 export default function RemaindersScreen({}: RemaindersScreenProps) {
   const count = useSelector((state) => state.counter.value);
   const dispatch = useDispatch();
   return (
-    <SafeArea className="flex-row items-center justify-center">
+    <SafeArea>
       <Pressable
         onPress={() => dispatch(increment())}
         className="rounded-lg bg-red-500 p-3"

@@ -1,17 +1,30 @@
-import { SafeAreaView } from "react-native-safe-area-context";
-import { View } from "react-native";
 import { ReactNode } from "react";
-
-import { cn } from "~/lib/utils";
+import { View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 type SafeAreaProps = {
   children: ReactNode;
-  className?: string;
+  paddings?: Partial<{
+    top: number;
+    bottom: number;
+    left: number;
+    right: number;
+  }>;
 };
-export default function SafeArea({ children, className }: SafeAreaProps) {
+export default function SafeArea({ children, paddings }: SafeAreaProps) {
+  const insets = useSafeAreaInsets();
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View className={cn("flex-1 bg-crystal-sky", className)}>{children}</View>
-    </SafeAreaView>
+    <View
+      style={{
+        backgroundColor: "#f2f5ff",
+        flex: 1,
+        paddingBottom: paddings?.bottom ?? insets.bottom,
+        paddingLeft: paddings?.left ?? insets.left,
+        paddingRight: paddings?.right ?? insets.right,
+        paddingTop: paddings?.top ?? insets.top,
+      }}
+    >
+      {children}
+    </View>
   );
 }

@@ -1,66 +1,46 @@
-import { CalendarList, DateData } from "react-native-calendars";
-import { StatusBar } from "expo-status-bar";
-import { Text, View } from "react-native";
 import { useState } from "react";
+import { Text, View } from "react-native";
+import { startOfMonth } from "date-fns/fp";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import {
+  toDateId,
+  Calendar as FlashCalendar,
+} from "@marceloterreiro/flash-calendar";
 
 import { SafeArea } from "~/components/layout";
+import { Calendar } from "~/components/inputs/calendar/calendar";
+import { linearTheme } from "~/components/inputs/calendar/linear-theme";
 
+const startOfThisMonth = startOfMonth(new Date());
 export default function CalendarScreen() {
-  const [selectedDate, setSelectedDate] = useState<string>(
-    new Date().toISOString(),
-  );
-
-  const onDayPress = (day: DateData) => {
-    setSelectedDate(day.dateString);
-  };
-
+  const [activeDateId, setActiveDateId] = useState<string | undefined>();
   return (
-    <SafeArea className="">
-      <StatusBar backgroundColor="#ffffff" />
-      <View className="flex h-20 items-center justify-center rounded-b-3xl bg-white">
+    <SafeArea paddings={{ top: 0 }}>
+      <View
+        style={{ paddingTop: useSafeAreaInsets().top }}
+        className="flex min-h-20 items-center justify-center rounded-b-3xl bg-white"
+      >
         <Text className="p-3 font-poppins text-2xl font-bold">
           Select day from calendar
         </Text>
       </View>
-
-      <CalendarList
-        theme={{
-          backgroundColor: "#f2f5ff",
-          calendarBackground: "#f2f5ff",
-          dayTextColor: "#2e3a59",
-          dotColor: "#5e3ef7",
-          indicatorColor: "#653cf6",
-          monthTextColor: "#2e3a59",
-          selectedDayBackgroundColor: "#5e3ef7",
-          selectedDayTextColor: "#ffffff",
-          selectedDotColor: "#ffffff",
-          textDayFontFamily: "monospace",
-          textDayFontSize: 16,
-          textDayFontWeight: "300",
-          textDayHeaderFontFamily: "monospace",
-          textDayHeaderFontSize: 16,
-          textDayHeaderFontWeight: "300",
-          textDisabledColor: "#a1a1a6",
-          textMonthFontFamily: "monospace",
-          textMonthFontSize: 16,
-          textMonthFontWeight: "bold",
-          textSectionTitleColor: "#653cf6",
-          todayTextColor: "#5e3ef7",
-        }}
-        markedDates={{
-          [selectedDate]: {
-            selected: true,
-            selectedColor: "#5e3ef7",
-            selectedTextColor: "#ffffff",
-          },
-        }}
-        minDate={new Date().toISOString()}
-        monthFormat={"yyyy MMMM"}
-        onDayPress={onDayPress}
-        scrollEnabled={true}
-        pastScrollRange={0}
-        hideArrows={true}
-      />
+      <View className="mt-5 flex-1 px-4">
+        <FlashCalendar.List
+          calendarActiveDateRanges={[
+            { endId: activeDateId, startId: activeDateId },
+          ]}
+          calendarDayHeight={48}
+          calendarMonthHeaderHeight={30}
+          calendarInitialMonthId={toDateId(startOfThisMonth)}
+          calendarPastScrollRangeInMonths={0}
+          onCalendarDayPress={setActiveDateId}
+          theme={linearTheme}
+          ItemSeparatorComponent={() => <View className="h-10" />}
+          renderItem={({ item }) => (
+            <Calendar calendarMonthId={item.id} {...item.calendarProps} />
+          )}
+        />
+      </View>
     </SafeArea>
   );
 }

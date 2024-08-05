@@ -1,11 +1,11 @@
-import Animated, {
-  useAnimatedStyle,
-  useSharedValue,
-  withSpring,
-} from "react-native-reanimated";
-import { LayoutChangeEvent, Pressable, View } from "react-native";
-import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import React, { useState } from "react";
+import { View, Pressable, LayoutChangeEvent } from "react-native";
+import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
+import Animated, {
+  withSpring,
+  useSharedValue,
+  useAnimatedStyle,
+} from "react-native-reanimated";
 
 import { cn } from "~/lib/utils";
 
