@@ -1,11 +1,11 @@
-import Animated, {
-  useAnimatedStyle,
-  useSharedValue,
-  withSpring,
-} from "react-native-reanimated";
-import { LayoutChangeEvent, Pressable, View } from "react-native";
-import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import React, { useState } from "react";
+import { View, Pressable, LayoutChangeEvent } from "react-native";
+import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
+import Animated, {
+  withSpring,
+  useSharedValue,
+  useAnimatedStyle,
+} from "react-native-reanimated";
 
 import { cn } from "~/lib/utils";
 
@@ -23,8 +23,8 @@ export default function TabBar({
   }));
 
   const [dimensions, setDimensions] = useState({
-    width: 124.95237731933594,
     height: 65.9047622680664,
+    width: 124.95237731933594,
   });
 
   const gapBetweenButtons = 8;
@@ -78,8 +78,8 @@ export default function TabBar({
 
           const onLongPress = () => {
             navigation.emit({
-              type: "tabLongPress",
               target: route.key,
+              type: "tabLongPress",
             });
           };
 

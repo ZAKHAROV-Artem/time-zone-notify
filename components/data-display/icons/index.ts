@@ -1,5 +1,6 @@
-import { Calendar } from "./calendar";
-import { BellDot } from "./bell-dot";
 import { Home } from "./home";
+import { BellDot } from "./bell-dot";
+import { Calendar } from "./calendar";
+import { Settings } from "./settigns";
 
-export { Calendar, BellDot, Home };
+export { Home, BellDot, Calendar, Settings };

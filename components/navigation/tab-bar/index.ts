@@ -1,4 +1,4 @@
-import TabBarItemIcon from "./tab-bar-item-icon";
 import TabBar from "./tab-bar";
+import TabBarItemIcon from "./tab-bar-item-icon";
 
-export { TabBarItemIcon, TabBar };
+export { TabBar, TabBarItemIcon };

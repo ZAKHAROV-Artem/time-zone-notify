@@ -1,11 +1,16 @@
+import React from "react";
 import Animated, {
-  useAnimatedStyle,
   withSpring,
   withTiming,
+  useAnimatedStyle,
 } from "react-native-reanimated";
-import React from "react";
 
-import { Calendar, BellDot, Home } from "~/components/data-display/icons";
+import {
+  Home,
+  BellDot,
+  Calendar,
+  Settings,
+} from "~/components/data-display/icons";
 
 type Props = {
   isFocused: boolean;
@@ -14,12 +19,12 @@ type Props = {
 
 export default function TabBarItemIcon({ isFocused, name }: Props) {
   const iconStyle = useAnimatedStyle(() => ({
+    opacity: withTiming(isFocused ? 1 : 0.5),
     transform: [
       {
         scale: withSpring(isFocused ? 1.2 : 1),
       },
     ],
-    opacity: withTiming(isFocused ? 1 : 0.5),
   }));
 
   function Icon() {
@@ -28,6 +33,8 @@ export default function TabBarItemIcon({ isFocused, name }: Props) {
         return <BellDot className="h-4 w-4 text-royal-violet" />;
       case "calendar":
         return <Calendar className="h-4 w-4 text-royal-violet" />;
+      case "settings":
+        return <Settings className="h-4 w-4 text-royal-violet" />;
       case "index":
         return <Home className="h-4 w-4 text-royal-violet" />;
       default:
