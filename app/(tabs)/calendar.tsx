@@ -8,7 +8,7 @@ import {
 } from "@marceloterreiro/flash-calendar";
 
 import { SafeArea } from "~/components/layout";
-import { Calendar } from "~/components/inputs/calendar/calendar";
+import { Calendar } from "~/components/inputs/calendar";
 import { linearTheme } from "~/components/inputs/calendar/linear-theme";
 
 const startOfThisMonth = startOfMonth(new Date());
