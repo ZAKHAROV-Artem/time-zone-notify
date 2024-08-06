@@ -16,6 +16,7 @@ module.exports = {
         "royal-violet": "#5e3ef7",
         "slate-grey": "#434552",
         "soft-periwinkle": "#d8def3",
+        "twilight-shadow": "#242736",
         "urban-mist": "#a1a1a6",
         white: "#ffffff",
       },
