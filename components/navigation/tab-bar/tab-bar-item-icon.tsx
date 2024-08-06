@@ -10,6 +10,7 @@ import {
   BellDot,
   Calendar,
   Settings,
+  ListChecks,
 } from "~/components/data-display/icons";
 
 type Props = {
@@ -37,6 +38,8 @@ export default function TabBarItemIcon({ isFocused, name }: Props) {
         return <Settings className="h-4 w-4 text-royal-violet" />;
       case "index":
         return <Home className="h-4 w-4 text-royal-violet" />;
+      case "tasks":
+        return <ListChecks className="h-4 w-4 text-royal-violet" />;
       default:
         return null;
     }
