@@ -5,12 +5,14 @@ import { router } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { Text } from "~/components/ui/text";
+import { useSelector } from "~/store/hooks";
 import { SafeArea } from "~/components/layout";
 import { Button } from "~/components/ui/button";
 import { Plus } from "~/components/data-display/icons";
 import { SwiperCalendar } from "~/components/inputs/swiper-calendar";
 
 export default function RemaindersScreen() {
+  const tasks = useSelector((state) => state.tasks.tasks);
   const [selectedDate, setSelectedDate] = useState<Dayjs>(dayjs());
 
   return (
@@ -46,6 +48,14 @@ export default function RemaindersScreen() {
         </View>
         <View className="flex-1 px-2">
           <Text className="text-2xl font-bold text-midnight-blue">Tasks</Text>
+          {tasks?.map((task) => (
+            <Text
+              key={task.id}
+              className="flex flex-row items-center justify-between gap-4"
+            >
+              {task.name}
+            </Text>
+          ))}
         </View>
       </View>
     </SafeArea>

@@ -14,8 +14,12 @@ import {
 import rootReducer from "./reducers";
 
 const persistConfig = {
+  blacklist: ["modals"],
   key: "root",
+
   storage: AsyncStorage,
+
+  whitelist: ["tasks"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

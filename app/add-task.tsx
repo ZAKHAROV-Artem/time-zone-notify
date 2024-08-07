@@ -1,19 +1,23 @@
 import dayjs from "dayjs";
+import * as Crypto from "expo-crypto";
 import { View, Pressable } from "react-native";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LinearGradient } from "expo-linear-gradient";
 import { router, useLocalSearchParams } from "expo-router";
-import Animated, { FadeIn } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { toDateId, fromDateId } from "@marceloterreiro/flash-calendar";
 
 import { Modals } from "~/types/modals";
 import { Text } from "~/components/ui/text";
+import { useDispatch } from "~/store/hooks";
 import { useModal } from "~/hooks/use-modal";
 import { Input } from "~/components/ui/input";
 import { SafeArea } from "~/components/layout";
 import { Button } from "~/components/ui/button";
+import { createTask } from "~/store/slices/tasks";
+import { Textarea } from "~/components/ui/textarea";
 import { ArrowLeft } from "~/components/data-display/icons";
 import { SelectDateModal } from "~/components/utils/modals";
 import {
@@ -22,9 +26,16 @@ import {
 } from "~/types/validation/add-task-validation-schema";
 
 export default function AddTaskScreen() {
+  const dispatch = useDispatch();
   const { handleOpen } = useModal(Modals.SelectDateModal);
   const { selectedDate }: { selectedDate: string } = useLocalSearchParams();
-  const { control, handleSubmit, setValue, watch } = useForm<AddTaskFields>({
+  const {
+    control,
+    formState: { errors },
+    handleSubmit,
+    setValue,
+    watch,
+  } = useForm<AddTaskFields>({
     defaultValues: {
       description: "",
       dueDate: new Date(selectedDate),
@@ -33,8 +44,14 @@ export default function AddTaskScreen() {
     resolver: zodResolver(AddTaskSchema),
   });
   const dueDate = watch("dueDate");
-  const onSubmit: SubmitHandler<AddTaskFields> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<AddTaskFields> = async (data) => {
+    dispatch(
+      createTask({
+        ...data,
+        dueDate: data.dueDate.toISOString(),
+        id: Crypto.randomUUID(),
+      }),
+    );
     router.back();
   };
 
@@ -68,7 +85,18 @@ export default function AddTaskScreen() {
             </View>
             <View className="gap-7">
               <View>
-                <Text className="ml-1 text-white">Name *</Text>
+                <View className="flex flex-row justify-between">
+                  <Text className="ml-1 text-white">Name *</Text>
+                  {errors.name?.message && (
+                    <Animated.Text
+                      entering={FadeIn}
+                      exiting={FadeOut}
+                      className="text-red-300"
+                    >
+                      {errors.name.message}
+                    </Animated.Text>
+                  )}
+                </View>
                 <Controller
                   control={control}
                   name="name"
@@ -85,7 +113,18 @@ export default function AddTaskScreen() {
                 />
               </View>
               <View>
-                <Text className="ml-1 text-white">Due date *</Text>
+                <View className="flex flex-row justify-between">
+                  <Text className="ml-1 text-white">Due date *</Text>
+                  {errors.dueDate?.message && (
+                    <Animated.Text
+                      entering={FadeIn}
+                      exiting={FadeOut}
+                      className="text-red-300"
+                    >
+                      {errors.dueDate.message}
+                    </Animated.Text>
+                  )}
+                </View>
                 <Controller
                   control={control}
                   name="dueDate"
@@ -107,7 +146,42 @@ export default function AddTaskScreen() {
             </View>
           </LinearGradient>
         </View>
-        <View className="absolute bottom-0 h-[65%] w-full rounded-t-3xl bg-white px-4 pt-10">
+        <View className="absolute bottom-0 flex h-[65%] w-full rounded-t-3xl bg-white px-4 pb-4 pt-10">
+          <View className="grow gap-10">
+            <View className="gap-3">
+              <View className="flex flex-row justify-between">
+                <Text className="ml-1 text-xl text-powder-blue">
+                  Description
+                </Text>
+                {errors.description?.message && (
+                  <Animated.Text
+                    entering={FadeIn}
+                    exiting={FadeOut}
+                    className="text-red-400"
+                  >
+                    {errors.description.message}
+                  </Animated.Text>
+                )}
+              </View>
+              <Controller
+                control={control}
+                name="description"
+                render={({
+                  field: { onChange, value },
+                  fieldState: { error },
+                }) => (
+                  <Textarea
+                    placeholder="Lorem ipsum dolor sit amet, er adipiscing elit, sed dianummy nibh euismod  dolor sit amet, er adipiscing elit, sed dianummy nibh euismod.s"
+                    value={value}
+                    onChangeText={onChange}
+                  />
+                )}
+              />
+            </View>
+            <View className="gap-3">
+              <Text className="ml-1 text-xl text-powder-blue">Remind me</Text>
+            </View>
+          </View>
           <Button
             variant={"violet"}
             size={"large"}
