@@ -6,20 +6,25 @@ import { router, useLocalSearchParams } from "expo-router";
 import Animated, { FadeIn } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import { toDateId, fromDateId } from "@marceloterreiro/flash-calendar";
 
+import { Modals } from "~/types/modals";
 import { Text } from "~/components/ui/text";
+import { useModal } from "~/hooks/use-modal";
 import { Input } from "~/components/ui/input";
 import { SafeArea } from "~/components/layout";
 import { Button } from "~/components/ui/button";
 import { ArrowLeft } from "~/components/data-display/icons";
+import { SelectDateModal } from "~/components/utils/modals";
 import {
   AddTaskSchema,
   AddTaskFields,
 } from "~/types/validation/add-task-validation-schema";
 
 export default function AddTaskScreen() {
+  const { handleOpen } = useModal(Modals.SelectDateModal);
   const { selectedDate }: { selectedDate: string } = useLocalSearchParams();
-  const { control, handleSubmit } = useForm<AddTaskFields>({
+  const { control, handleSubmit, setValue, watch } = useForm<AddTaskFields>({
     defaultValues: {
       description: "",
       dueDate: new Date(selectedDate),
@@ -27,6 +32,7 @@ export default function AddTaskScreen() {
     },
     resolver: zodResolver(AddTaskSchema),
   });
+  const dueDate = watch("dueDate");
   const onSubmit: SubmitHandler<AddTaskFields> = (data) => {
     console.log(data);
     router.back();
@@ -87,11 +93,14 @@ export default function AddTaskScreen() {
                     field: { onChange, value },
                     fieldState: { error },
                   }) => (
-                    <View className="mx-1 border-b border-white">
+                    <Pressable
+                      onPress={handleOpen}
+                      className="mx-1 border-b border-white"
+                    >
                       <Text className="py-2 font-poppins-semibold text-2xl text-white">
                         {dayjs(value).format("ddd DD, YYYY")}
                       </Text>
-                    </View>
+                    </Pressable>
                   )}
                 />
               </View>
@@ -108,6 +117,10 @@ export default function AddTaskScreen() {
           </Button>
         </View>
       </View>
+      <SelectDateModal
+        setValue={(date) => setValue("dueDate", fromDateId(date))}
+        value={toDateId(dueDate)}
+      />
     </SafeArea>
   );
 }

@@ -4,6 +4,7 @@ import { useFonts } from "expo-font";
 import { Provider } from "react-redux";
 import { StatusBar } from "expo-status-bar";
 import * as SplashScreen from "expo-splash-screen";
+import { PortalHost } from "@rn-primitives/portal";
 import { PersistGate } from "redux-persist/integration/react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import {
@@ -43,6 +44,7 @@ export default function RootLayout() {
             <Stack.Screen name="(tabs)" />
             <Stack.Screen options={{ animation: "fade" }} name="add-task" />
           </Stack>
+          <PortalHost />
         </PersistGate>
       </Provider>
     </SafeAreaProvider>
