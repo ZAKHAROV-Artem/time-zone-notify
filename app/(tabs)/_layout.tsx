@@ -12,7 +12,7 @@ export default function TabLayout() {
     >
       <Tabs.Screen
         options={{
-          title: "Tab One",
+          title: "Home",
         }}
         name="index"
       />
@@ -21,6 +21,12 @@ export default function TabLayout() {
           title: "Calendar",
         }}
         name="calendar"
+      />
+      <Tabs.Screen
+        options={{
+          title: "Tasks",
+        }}
+        name="tasks"
       />
       <Tabs.Screen
         options={{

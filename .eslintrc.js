@@ -10,7 +10,6 @@ module.exports = {
     "perfectionist/sort-named-exports": ["error", { type: "line-length" }],
     "perfectionist/sort-named-imports": ["error", { type: "line-length" }],
     "perfectionist/sort-objects": ["error", { type: "alphabetical" }],
-
     "prettier/prettier": [
       "error",
       {

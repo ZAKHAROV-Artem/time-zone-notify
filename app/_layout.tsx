@@ -4,8 +4,13 @@ import { useFonts } from "expo-font";
 import { Provider } from "react-redux";
 import { StatusBar } from "expo-status-bar";
 import * as SplashScreen from "expo-splash-screen";
+import { PortalHost } from "@rn-primitives/portal";
 import { PersistGate } from "redux-persist/integration/react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import {
+  Poppins_400Regular,
+  Poppins_600SemiBold,
+} from "@expo-google-fonts/poppins";
 
 import { store, persistor } from "~/store";
 
@@ -15,7 +20,8 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
-    "Poppins-Regular": require("~/assets/fonts/Poppins-Regular.ttf"),
+    Poppins_400Regular,
+    Poppins_600SemiBold,
   });
 
   useEffect(() => {
@@ -32,9 +38,13 @@ export default function RootLayout() {
       <Provider store={store}>
         <PersistGate persistor={persistor} loading={null}>
           <StatusBar hidden={true} translucent />
-          <Stack screenOptions={{ navigationBarHidden: true }}>
-            <Stack.Screen options={{ headerShown: false }} name="(tabs)" />
+          <Stack
+            screenOptions={{ headerShown: false, navigationBarHidden: true }}
+          >
+            <Stack.Screen name="(tabs)" />
+            <Stack.Screen options={{ animation: "fade" }} name="add-task" />
           </Stack>
+          <PortalHost />
         </PersistGate>
       </Provider>
     </SafeAreaProvider>

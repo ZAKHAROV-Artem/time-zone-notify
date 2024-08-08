@@ -1,9 +1,11 @@
 import { combineReducers } from "@reduxjs/toolkit";
 
-import counterSlice from "../slices/counter";
+import tasksSlice from "../slices/tasks";
+import modalsSlice from "../slices/modals";
 
 const rootReducer = combineReducers({
-  counter: counterSlice,
+  modals: modalsSlice,
+  tasks: tasksSlice,
 });
 
 export default rootReducer;

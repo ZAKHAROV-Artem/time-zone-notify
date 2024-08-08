@@ -6,7 +6,7 @@ import { cn } from "~/lib/utils";
 import { TextClassContext } from "~/components/ui/text";
 
 const buttonVariants = cva(
-  "group flex items-center justify-center rounded-full shadow-md shadow-slate-grey",
+  "group flex items-center justify-center rounded-full",
   {
     defaultVariants: {
       size: "default",

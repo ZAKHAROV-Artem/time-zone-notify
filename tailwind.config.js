@@ -21,7 +21,8 @@ module.exports = {
         white: "#ffffff",
       },
       fontFamily: {
-        poppins: ["Poppins-Regular"],
+        poppins: ["Poppins_400Regular"],
+        "poppins-semibold": ["Poppins_600SemiBold"],
       },
     },
   },
